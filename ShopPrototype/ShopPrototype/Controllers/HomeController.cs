@@ -13,6 +13,11 @@ namespace ShopPrototype.Controllers
 			return View();
 		}
 
+		public ActionResult Search()
+		{
+			return View();
+		}
+
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
