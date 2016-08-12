@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPrototype", "ShopPrototype\ShopPrototype.csproj", "{F3DBCFCF-F6BB-4347-90AB-C0EF55AC2AEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPrototype.Modules", "ShopPrototype.Modules\ShopPrototype.Modules.csproj", "{B70D5EAF-65A6-431E-8361-655998CD71BF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ShopPrototype.Front01", "ShopPrototype.Front01\ShopPrototype.Front01.xproj", "{F7180350-FC1D-45D9-AD13-8D8048FD5E98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F3DBCFCF-F6BB-4347-90AB-C0EF55AC2AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3DBCFCF-F6BB-4347-90AB-C0EF55AC2AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3DBCFCF-F6BB-4347-90AB-C0EF55AC2AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B70D5EAF-65A6-431E-8361-655998CD71BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70D5EAF-65A6-431E-8361-655998CD71BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70D5EAF-65A6-431E-8361-655998CD71BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70D5EAF-65A6-431E-8361-655998CD71BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7180350-FC1D-45D9-AD13-8D8048FD5E98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7180350-FC1D-45D9-AD13-8D8048FD5E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7180350-FC1D-45D9-AD13-8D8048FD5E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7180350-FC1D-45D9-AD13-8D8048FD5E98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,19 @@
+﻿@using ShopPrototype.Modules.Search.Models
+@model SearchModel
+
+@{
+	ViewData["Title"] = "Поиск";
+}
+
+<h3>Услуга</h3>
+<ul class="list-group">
+	@foreach(var facility in Model.Facilities)
+	{
+		<li class="list-group-item">
+			<div class="checkbox checkbox-primary">
+				<input type="checkbox" id="ch_@facility.Id" /><label for="ch_@facility.Id">@facility.Title</label>
+			</div>
+		</li>
+	}
+</ul>
+<button class="btn btn-default">Далее</button>

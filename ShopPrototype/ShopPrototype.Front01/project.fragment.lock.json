@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "ShopPrototype.Modules/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/ShopPrototype.Modules.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/ShopPrototype.Modules.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/ShopPrototype.Modules.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}
