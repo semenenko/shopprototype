@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search\Entities\Facility.cs" />
+    <Compile Include="Search\Entities\Place.cs" />
+    <Compile Include="Search\Models\FacilityItem.cs" />
     <Compile Include="Search\Models\SearchModel.cs" />
     <Compile Include="Search\SearchModule.cs" />
   </ItemGroup>

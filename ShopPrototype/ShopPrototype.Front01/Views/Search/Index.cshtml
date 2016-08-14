@@ -6,14 +6,39 @@
 }
 
 <h3>Услуга</h3>
+
 <ul class="list-group">
-	@foreach(var facility in Model.Facilities)
-	{
-		<li class="list-group-item">
-			<div class="checkbox checkbox-primary">
-				<input type="checkbox" id="ch_@facility.Id" /><label for="ch_@facility.Id">@facility.Title</label>
-			</div>
-		</li>
-	}
+	@Html.EditorFor(m => m.Items)
 </ul>
+
 <button class="btn btn-default">Далее</button>
+
+<h3>Время</h3>
+
+<div class="container" style="width:300px;">
+	<div class='input-group date' id='datetimepicker1'>
+		<input type='text' class="form-control" style="width:100%" />
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-calendar"></span>
+		</span>
+	</div>
+</div>
+
+<h3>Место</h3>
+
+<div class="container" style="width:300px;">
+	<div class='input-group date' id='datetimepicker1'>
+		<input type='text' class="form-control" style="width:100%" />
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-search"></span>
+		</span>
+	</div>
+</div>
+
+@section scripts{ 
+<script type="text/javascript">
+            $(function () {
+            	$('#datetimepicker1').datetimepicker({ locale: 'ru' });
+            });
+</script>
+}

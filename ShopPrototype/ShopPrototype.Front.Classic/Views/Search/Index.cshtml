@@ -1,0 +1,81 @@
+﻿@using ShopPrototype.Modules.Search.Models
+@model SearchModel
+
+@{
+	ViewData["Title"] = "Поиск";
+}
+
+<h3>Услуга</h3>
+
+<ul class="list-group">
+	@Html.EditorFor(m => m.Items)
+</ul>
+
+<h3>Время</h3>
+
+<div class="container" style="width:300px;">
+	<div class='input-group date' id='datetimepicker1'>
+		<input type='text' class="form-control" style="width:100%" />
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-calendar"></span>
+		</span>
+	</div>
+</div>
+
+<h3>Место</h3>
+
+@*<div class="container" style="width:300px;">
+	<div class='input-group date' id='datetimepicker1'>
+		<input type='text' class="form-control" style="width:100%" />
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-search"></span>
+		</span>
+	</div>
+</div>*@
+
+@Html.Raw(Model.GetPlacesScript())
+@Model.GetPlacesScript()
+
+<div class="yamap" id="map" style="width:100%; height:400px;">
+
+</div>
+
+
+@section scripts{
+	<script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({ locale: 'ru' });
+        });
+
+        ymaps.ready(init);
+        var myMap;
+
+        function init() {
+        	myMap = new ymaps.Map("map", {
+        		center: [55.678672, 37.632153],
+        		zoom: 12,
+        		controls: []
+        	});
+        	myMap.controls.add('geolocationControl');
+        	myMap.controls.add('zoomControl');
+
+        	//myMap.events.add('click', function (e) {
+        	//	// Получение координат щелчка
+        	//	var coords = e.get('coords');
+        	//	alert(coords.join(', '));
+        	//});
+
+        	places.forEach(function (item, index) {
+        		var myPlacemark = new ymaps.GeoObject({
+        			geometry: {
+        				type: "Point",
+        				coordinates: [item.latitude, item.longitude]
+        			}
+        		});
+
+        		myMap.geoObjects.add(myPlacemark);
+        	});
+        }
+        
+	</script>
+}
