@@ -1,8 +1,0 @@
-﻿@using ShopPrototype.Modules.Search.Models
-@model FacilityItem
-
-<li class="list-group-item">
-	<div class="checkbox checkbox-primary">
-		<input type="checkbox" id="ch_@Model.Id" name="@Html.NameFor(m => m.Selected)" /><label for="ch_@Model.Id">@Model.Title</label>
-	</div>
-</li>
