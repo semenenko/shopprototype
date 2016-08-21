@@ -1,0 +1,18 @@
+﻿@using ShopPrototype.Modules.Search.Models
+@model SearchModel
+
+@{
+    ViewBag.Title = "Что";
+}
+
+<h2>Что</h2>
+
+<ul class="list-group">
+	@Html.EditorFor(m => m.Items)
+</ul>
+
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+	@Html.ActionLink("Назад", "AsapSearchDateAndTime", null, new { @class = "btn btn-danger" })
+	@Html.ActionLink("Далее", "AsapSearchLocation", null, new { @class = "btn btn-primary" })
+</div>
+

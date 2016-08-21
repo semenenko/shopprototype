@@ -19,5 +19,29 @@ namespace ShopPrototype.Front.Classic.Controllers
 
 			return View(model);
 		}
+
+		public ActionResult OrdinarySearch()
+		{
+
+			return View();
+		}
+
+		public ActionResult AsapSearchDateAndTime()
+		{
+			SearchModel model = searchModule.GetSearchModel();
+
+			return View(model);
+		}
+
+		public ActionResult AsapSearchFacilities()
+		{
+			SearchModel model = searchModule.GetSearchModel();
+			return View(model);
+		}
+
+		public ActionResult AsapSearchLocation()
+		{
+			return View();
+		}
 	}
 }

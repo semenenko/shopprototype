@@ -4,10 +4,51 @@
 @{
 	ViewData["Title"] = "Поиск";
 }
+	
+<h3>Как искать</h3>
+
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+	@Html.ActionLink("Обычный поиск", "OrdinarySearch", null, new { @class = "btn btn-primary" })
+	@Html.ActionLink("Как можно скорее!", "AsapSearchDateAndTime", null, new { @class = "btn btn-primary" })
+</div>
+
+
+@*<div style="display:table-row; width:100%;">
+	<div style="display:table-cell">@Html.ActionLink("Поиск", "SearchPlace", null, new { @class = "btn btn-default", style = "width:100px;" })</div>
+	<div style="display:table-cell"><div style="width:100px;">&nbsp;</div></div>
+	<div style="display:table-cell">@Html.ActionLink("Внезапно", "SearchTime", null, new { @class = "btn btn-default", style = "width:100px;" })</div>
+</div>*@
+@*<div class="form-group">
+	@Html.ActionLink("Поиск", "SearchPlace", null, new { @class = "btn btn-default" })
+</div>
+<div class="form-group">
+	@Html.ActionLink("Внезапно", "SearchTime", null, new { @class = "btn btn-default" })
+</div>*@
+
+
+
 
 @*<h3>Когда</h3>
+<div class="checkbox checkbox-primary">
+	<input type="checkbox" id="ch_now" name="Now" /><label for="ch_now">Прямо сейчас</label>
+</div>
+<h4>Выберите дату</h4>
+<div>
+	<input type="text" class="form-control datepicker" name="date" />
+</div>
 
-<div class="container" @*style="width:300px;">
+<h4>Выберите время</h4>
+<div>
+	<input type="text" class="form-control timepicker" name="time" />
+</div>
+
+<div style="display:table-row; width:100%;">
+	<div style="display:table-cell">@Html.ActionLink("Назад", "SearchPlace", null, new { @class = "btn btn-default", style = "width:100px;" })</div>
+	<div style="display:table-cell"><div style="width:100px;">&nbsp;</div></div>
+	<div style="display:table-cell">@Html.ActionLink("Далее", "SearchTime", null, new { @class = "btn btn-default", style = "width:100px;" })</div>
+</div>*@
+
+@*<div class="container" @*style="width:300px;">
 	<div class='input-group date' id='datetimepicker1'>
 		<input type='text' class="form-control" style="width:100%" />
 		<span class="input-group-addon">
@@ -16,13 +57,13 @@
 	</div>
 </div>*@
 
-<h3>Что</h3>
+@*<h3>Что</h3>*@
 
-<ul class="list-group">
+@*<ul class="list-group">
 	@Html.EditorFor(m => m.Items)
-</ul>
+</ul>*@
 
-<h3>Место</h3>
+@*<h3>Место</h3>*@
 
 @*<div class="container" style="width:300px;">
 	<div class='input-group date' id='datetimepicker1'>
@@ -43,39 +84,37 @@
 
 @section scripts{
 	<script type="text/javascript">
-        $(function () {
-        	$('#datetimepicker1').datetimepicker({ locale: 'ru', inline: true, sideBySide: true });
-        });
+        
 
-        ymaps.ready(init);
-        var myMap;
+        //ymaps.ready(init);
+        //var myMap;
 
-        function init() {
-        	myMap = new ymaps.Map("map", {
-        		center: [55.678672, 37.632153],
-        		zoom: 12,
-        		controls: []
-        	});
-        	myMap.controls.add('geolocationControl');
-        	myMap.controls.add('zoomControl');
+        //function init() {
+        //	myMap = new ymaps.Map("map", {
+        //		center: [55.678672, 37.632153],
+        //		zoom: 12,
+        //		controls: []
+        //	});
+        //	myMap.controls.add('geolocationControl');
+        //	myMap.controls.add('zoomControl');
 
-        	//myMap.events.add('click', function (e) {
-        	//	// Получение координат щелчка
-        	//	var coords = e.get('coords');
-        	//	alert(coords.join(', '));
-        	//});
+        //	//myMap.events.add('click', function (e) {
+        //	//	// Получение координат щелчка
+        //	//	var coords = e.get('coords');
+        //	//	alert(coords.join(', '));
+        //	//});
 
-        	places.forEach(function (item, index) {
-        		var myPlacemark = new ymaps.GeoObject({
-        			geometry: {
-        				type: "Point",
-        				coordinates: [item.latitude, item.longitude]
-        			}
-        		});
+        //	places.forEach(function (item, index) {
+        //		var myPlacemark = new ymaps.GeoObject({
+        //			geometry: {
+        //				type: "Point",
+        //				coordinates: [item.latitude, item.longitude]
+        //			}
+        //		});
 
-        		myMap.geoObjects.add(myPlacemark);
-        	});
-        }
+        //		myMap.geoObjects.add(myPlacemark);
+        //	});
+        //}
         
 	</script>
 }

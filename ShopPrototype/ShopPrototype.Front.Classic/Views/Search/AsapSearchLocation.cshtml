@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Где?";
+}
+
+<h2>Где?</h2>
+
+<div class="yamap" id="map" style="width:100%; height:400px;"></div>
+
+@section scripts{
+	<script type="text/javascript">
+        ymaps.ready(init);
+        var myMap;
+
+        function init() {
+        	myMap = new ymaps.Map("map", {
+        		center: [55.678672, 37.632153],
+        		zoom: 12,
+        		controls: []
+        	});
+        	myMap.controls.add('geolocationControl');
+        	myMap.controls.add('zoomControl');
+        	//myMap.controls.add('searchControl');
+
+        	var searchControl = new ymaps.control.SearchControl({
+        		options: {
+        			provider: 'yandex#search'
+        		}
+        	});
+
+        	searchControl.events.add('resultselect', function (e) {
+        		var index = searchControl.getSelectedIndex(e);
+        		var geoObject = searchControl.getResultsArray()[index];
+        		geoObject.options.set('draggable', true);
+        		var coordinates = geoObject.geometry.getCoordinates();
+        		alert(coordinates);
+        		//alert("Индекс выбранного элемента: " + index);
+        	});
+
+        	myMap.controls.add(searchControl);
+
+        	//myMap.events.add('click', function (e) {
+        	//	// Получение координат щелчка
+        	//	var coords = e.get('coords');
+        	//	alert(coords.join(', '));
+        	//});
+
+        	//places.forEach(function (item, index) {
+        	//	var myPlacemark = new ymaps.GeoObject({
+        	//		geometry: {
+        	//			type: "Point",
+        	//			coordinates: [item.latitude, item.longitude]
+        	//		}
+        	//	});
+
+        	//	myMap.geoObjects.add(myPlacemark);
+        	//});
+        }
+	</script>
+}
