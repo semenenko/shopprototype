@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPrototype.Front.Classic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPrototype.DataAccess.EF", "ShopPrototype.DataAccess.EF\ShopPrototype.DataAccess.EF.csproj", "{246D385E-60D3-4B9B-BEEE-5662FB5D9189}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLoader", "TestLoader\TestLoader.csproj", "{3D9AAE5C-7068-486E-B073-7011E7C43C6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{246D385E-60D3-4B9B-BEEE-5662FB5D9189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246D385E-60D3-4B9B-BEEE-5662FB5D9189}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{246D385E-60D3-4B9B-BEEE-5662FB5D9189}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D9AAE5C-7068-486E-B073-7011E7C43C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D9AAE5C-7068-486E-B073-7011E7C43C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D9AAE5C-7068-486E-B073-7011E7C43C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D9AAE5C-7068-486E-B073-7011E7C43C6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

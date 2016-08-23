@@ -34,8 +34,20 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.BulkInsert, Version=6.0.2.8, Culture=neutral, PublicKeyToken=630a17433349cb76, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.BulkInsert-ef6.6.0.2.8\lib\Net45\EntityFramework.BulkInsert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.MappingAPI, Version=6.0.0.7, Culture=neutral, PublicKeyToken=7ee2e825d201459e, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.MappingAPI.6.0.0.7\lib\net45\EntityFramework.MappingAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -49,13 +61,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="InitialLoader.cs" />
+    <Compile Include="Migrations\201608221902041_init.cs" />
+    <Compile Include="Migrations\201608221902041_init.Designer.cs">
+      <DependentUpon>201608221902041_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608221910212_location1.cs" />
+    <Compile Include="Migrations\201608221910212_location1.Designer.cs">
+      <DependentUpon>201608221910212_location1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608231926191_salon_coord.cs" />
+    <Compile Include="Migrations\201608231926191_salon_coord.Designer.cs">
+      <DependentUpon>201608231926191_salon_coord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608231949170_salonLocation_Id.cs" />
+    <Compile Include="Migrations\201608231949170_salonLocation_Id.Designer.cs">
+      <DependentUpon>201608231949170_salonLocation_Id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecificEntities\Location.cs" />
+    <Compile Include="SpecificEntities\SalonLocation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShopPrototype.Modules\ShopPrototype.Modules.csproj">
+      <Project>{b70d5eaf-65a6-431e-8361-655998cd71bf}</Project>
+      <Name>ShopPrototype.Modules</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608221902041_init.resx">
+      <DependentUpon>201608221902041_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608221910212_location1.resx">
+      <DependentUpon>201608221910212_location1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608231926191_salon_coord.resx">
+      <DependentUpon>201608231926191_salon_coord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608231949170_salonLocation_Id.resx">
+      <DependentUpon>201608231949170_salonLocation_Id.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
