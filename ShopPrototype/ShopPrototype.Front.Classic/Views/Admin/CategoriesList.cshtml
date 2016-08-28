@@ -1,0 +1,35 @@
+﻿@using ShopPrototype.Modules.Admin.Models
+@using ShopPrototype.Modules.Entities
+
+@model CategoriesList
+
+@{
+    ViewBag.Title = "CategoriesList";
+}
+
+<h2>CategoriesList</h2>
+
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-condensed">
+			<thead>
+				<tr><th></th><th></th></tr>
+			</thead>
+			<tbody>
+				@foreach (FacilityCategory item in Model.Items)
+				{
+					<tr>
+						<td>@Html.ActionLink(item.Title, "Category", new { id = item.Id })</td>
+						<td></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="col-sm-12">
+
+	</div>
+</div>
+
+
+

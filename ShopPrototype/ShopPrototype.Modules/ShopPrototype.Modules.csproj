@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\Models\CategoriesList.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Entities\Facility.cs" />
