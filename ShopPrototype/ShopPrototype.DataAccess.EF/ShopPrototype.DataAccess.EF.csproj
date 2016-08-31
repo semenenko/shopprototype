@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AdminRepository.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="InitialLoader.cs" />
     <Compile Include="Migrations\201608221902041_init.cs" />
@@ -81,8 +82,10 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="SpecificEntities\Location.cs" />
     <Compile Include="SpecificEntities\SalonLocation.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

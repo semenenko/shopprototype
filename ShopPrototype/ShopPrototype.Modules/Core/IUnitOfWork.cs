@@ -1,6 +1,8 @@
-﻿namespace ShopPrototype.Modules.Core
+﻿using System;
+
+namespace ShopPrototype.Modules.Core
 {
-	public interface IUnitOfWork
+	public interface IUnitOfWork : IDisposable
 	{
 		void Commit();
 	}

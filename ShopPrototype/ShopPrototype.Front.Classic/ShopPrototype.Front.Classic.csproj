@@ -422,6 +422,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ShopPrototype.DataAccess.EF\ShopPrototype.DataAccess.EF.csproj">
+      <Project>{246d385e-60d3-4b9b-beee-5662fb5d9189}</Project>
+      <Name>ShopPrototype.DataAccess.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShopPrototype.Modules\ShopPrototype.Modules.csproj">
       <Project>{b70d5eaf-65a6-431e-8361-655998cd71bf}</Project>
       <Name>ShopPrototype.Modules</Name>
