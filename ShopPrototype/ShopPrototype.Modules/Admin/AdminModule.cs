@@ -24,5 +24,14 @@ namespace ShopPrototype.Modules.Admin
 				return repository.GetCategoriresList();
 			}
 		}
+
+		public void AddCategory(FacilityCategoryModel model)
+		{
+			using(IUnitOfWork unitOfWork = repository.BeginUnitOfWork())
+			{
+				repository.AddCategory(model);
+				unitOfWork.Commit();
+			}
+		}
 	}
 }

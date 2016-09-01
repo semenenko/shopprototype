@@ -43,6 +43,8 @@
     <Compile Include="Admin\AdminModule.cs" />
     <Compile Include="Admin\IAdminRepository.cs" />
     <Compile Include="Admin\Models\CategoriesList.cs" />
+    <Compile Include="Admin\Models\FacilityCategoryModel.cs" />
+    <Compile Include="Admin\Models\FacilityModel.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Entities\Facility.cs" />
