@@ -1,0 +1,16 @@
+﻿@using ShopPrototype.Modules.Admin.Models
+
+@model FacilityModel
+
+<tr>
+	<td>
+		@Html.HiddenFor(m => m.Id) @Html.HiddenFor(m => m.FacilityCategoryId)
+		@Html.EditorFor(m => m.SortOrder, new { htmlAttributes = new { @class = "form-control", @type = "number", placeholder = "Порядок вывода" } })
+	</td>
+	<td>
+		@Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control", @type = "text", placeholder = "Название услуги" } })
+	</td>
+	<td>
+		@Html.EditorFor(m => m.DurationMin, new { htmlAttributes = new { @class = "form-control", @type = "number", placeholder = "Продолжительность услуги" } })
+	</td>
+</tr>

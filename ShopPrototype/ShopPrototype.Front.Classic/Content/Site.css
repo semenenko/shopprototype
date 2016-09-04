@@ -22,3 +22,29 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/*****************MY CUSTOM CSS***************/
+
+.sort-buttons button
+{
+	width:100%;
+	text-align:left;
+	border:none;
+	border-radius:0;
+}
+
+.sort-buttons button span
+{
+	float:left;
+}
+
+.sort-buttons button span.glyphicon
+{
+	float:right;
+}
+
+tr.sort-header th
+{
+	padding:0 !important;
+}

@@ -1,0 +1,26 @@
+﻿@using ShopPrototype.Modules.Admin.Models
+@model SalonsList
+
+@using (Html.BeginForm())
+{
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th></th>
+				<th>@Html.DisplayFor(x => x.NameHeader)</th>
+			</tr>
+		</thead>
+		<tbody>
+			@Html.EditorFor(x => x.QueryObject)
+			@foreach(SalonListItem item in Model.Items)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@Html.ActionLink(item.Name, "Salon", new { id = item.Id })</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	@Html.EditorFor(x => x.QueryObject, "PagerPartial")
+	<input type="hidden" name="QueryObject.SortBy" value="@Model.QueryObject.SortBy" />
+}

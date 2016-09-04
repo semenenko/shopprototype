@@ -1,0 +1,9 @@
+﻿@using ShopPrototype.Modules.Admin.Models
+@model SalonFacilityModel
+
+<tr>
+	<td>@Model.CategoryTitle</td>
+	<td>@Model.FacilityTitle @Html.HiddenFor(x => x.FacilityId)</td>
+	<td>@Html.CheckBoxFor(x => x.Selected)</td>
+	<td>@Html.TextBoxFor(x => x.DurationMin)</td>
+</tr>

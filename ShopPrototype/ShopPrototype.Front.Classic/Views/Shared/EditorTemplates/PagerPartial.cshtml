@@ -1,0 +1,58 @@
+﻿@using ShopPrototype.Modules.Core
+@model QueryObject
+
+@Html.HiddenFor(m => m.CurrentPage)
+@Html.HiddenFor(m => m.PageSize)
+
+@{
+	int start = Model.CurrentPage - 5;
+
+	if (start < 1)
+	{
+		start = 1;
+	}
+
+	int end = Model.CurrentPage + 5;
+
+	if (end > Model.PagesCount)
+	{
+		end = Model.PagesCount;
+	}
+
+	if (start == 1)
+	{
+		end = Math.Min(Model.PagesCount, 11);
+	}
+}
+
+<nav>
+	<ul class="pagination">
+		<li>
+			<button value="1" name="QueryObject.GoToPage" id="GoToPage">&laquo;</button>
+		</li>
+		@for (int page = start; page <= end; page++)
+		{
+			if (page == Model.CurrentPage)
+			{
+				<li class="active">
+					<button value="@page" name="QueryObject.GoToPage" id="GoToPage">@page</button>
+				</li>
+			}
+			else
+			{
+				<li>
+					<button value="@page" name="QueryObject.GoToPage" id="GoToPage">@page</button>
+				</li>
+			}
+		}
+		<li>
+			<button value="@Model.PagesCount" name="QueryObject.GoToPage" id="GoToPage">&raquo;</button>
+		</li>
+	</ul>
+	@if (Model.ItemsTotal.HasValue)
+	{
+		<div>
+			<span class="label label-info">Всего: @Model.ItemsTotal.Value</span>
+		</div>
+	}
+</nav>

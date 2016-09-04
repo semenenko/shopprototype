@@ -1,0 +1,13 @@
+﻿@using ShopPrototype.Modules.Admin.Models
+@model SalonQueryObject
+
+<tr>
+	<td>
+		<button class="btn btn-link" name="Filter" value="Filter">
+			<span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+		</button>
+	</td>
+	<td>
+		@Html.TextBoxFor(x => x.Name, new { @class = "form-control input-sm" })
+	</td>
+</tr>

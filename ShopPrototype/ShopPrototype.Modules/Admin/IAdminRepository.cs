@@ -9,6 +9,14 @@ namespace ShopPrototype.Modules.Admin
 
 		void AddCategory(FacilityCategoryModel model);
 
+		FacilityCategoryModel GetCategory(int id);
+
 		void UpdateCategory(FacilityCategoryModel model);
+
+		void AddFacility(FacilityModel model);
+
+		SalonsList GetSalons(SalonQueryObject queryObject);
+
+		SalonModel GetSalon(int id);
 	}
 }

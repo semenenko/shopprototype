@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ShopPrototype.Modules.Entities
 {
@@ -15,5 +11,7 @@ namespace ShopPrototype.Modules.Entities
 		public double Lat { get; set; }
 
 		public double Long { get; set; }
+
+		public virtual ICollection<SalonFacility> Facilities { get; set; }
 	}
 }

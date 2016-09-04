@@ -33,5 +33,42 @@ namespace ShopPrototype.Front.Classic.Controllers
 
 			return RedirectToAction("CategoriesList");
 		}
+
+		public ActionResult Category(int id)
+		{
+			FacilityCategoryModel model = adminModule.GetCategory(id);
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult Category(FacilityCategoryModel model)
+		{
+			adminModule.UpdateCategory(model);
+
+			return RedirectToAction("Category");
+		}
+
+		[HttpPost]
+		public ActionResult AddFacility(FacilityModel model)
+		{
+			adminModule.AddFacility(model);
+
+			return RedirectToAction("Category", new { id = model.FacilityCategoryId });
+		}
+
+		public ActionResult Salons(SalonQueryObject queryObject)
+		{
+			SalonsList model = adminModule.GetSalons(queryObject);
+
+			return View(model);
+		}
+
+		public ActionResult Salon(int id)
+		{
+			SalonModel model = adminModule.GetSalon(id);
+
+			return View(model);
+		}
 	}
 }

@@ -11,20 +11,30 @@
 
 <div class="row">
 	<div class="col-sm-6">
-		<table class="table table-condensed">
-			<thead>
-				<tr><th></th><th></th></tr>
-			</thead>
-			<tbody>
-				@foreach (FacilityCategory item in Model.Items)
-				{
-					<tr>
-						<td>@Html.ActionLink(item.Title, "Category", new { id = item.Id })</td>
-						<td></td>
-					</tr>
-				}
-			</tbody>
-		</table>
+		<h3>Список категорий</h3>
+		@using (Html.BeginForm("AddCategory", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+		{
+			<table class="table table-condensed">
+				<thead>
+					<tr><th>Номер</th><th>Название</th><th></th></tr>
+				</thead>
+				<tbody>
+					@foreach (FacilityCategory item in Model.Items.OrderBy(x => x.SortOrder))
+					{
+						<tr>
+							<td>@item.SortOrder</td>
+							<td>@Html.ActionLink(item.Title, "Category", new { id = item.Id })</td>
+							<td></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary">Сохранить</button>
+				</div>
+			</div>
+		}
 	</div>
 	<div class="col-sm-6">
 		<h3>Новая категория</h3>
@@ -39,13 +49,13 @@
 			<div class="form-group">
 				<label for="SortOrder" class="col-sm-2 control-label">Номер</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" id="SortOrder" name="SortOrder" placeholder="Порядок вывода">
+					<input type="number" class="form-control" id="SortOrder" name="SortOrder" placeholder="Порядок вывода" value="@Model.NewNumber">
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Добавить</button>
+					<button type="submit" class="btn btn-primary">Добавить</button>
 				</div>
 			</div>
 		}

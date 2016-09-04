@@ -1,0 +1,9 @@
+﻿@using ShopPrototype.Modules.Core
+@model ColumnHeader
+
+<div class="sort-buttons">
+	<button name="QueryObject.SortBy" value="@Model.SortCommand" class="btn btn-default">
+		<span>@Model.DisplayName</span>
+		<span class="@Model.BootstrapGlyphiconClass"></span>
+	</button>
+</div>

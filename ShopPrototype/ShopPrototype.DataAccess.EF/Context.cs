@@ -24,6 +24,19 @@ namespace ShopPrototype.DataAccess.EF
 			modelBuilder.Entity<SalonLocation>()
 				.HasRequired(x => x.Salon)
 				.WithOptional();
+
+			modelBuilder.Entity<SalonFacility>()
+				.HasKey(x => new { x.SalonId, x.FacilityId });
+
+			modelBuilder.Entity<SalonFacility>()
+				.HasRequired(x => x.Salon)
+				.WithMany(x => x.Facilities)
+				.HasForeignKey(x => x.SalonId);
+
+			modelBuilder.Entity<SalonFacility>()
+				.HasRequired(x => x.Facility)
+				.WithMany()
+				.HasForeignKey(x => x.FacilityId);
 		}
 	}
 }

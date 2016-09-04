@@ -8,6 +8,10 @@
 
 		public int SortOrder { get; set; }
 
+		public int DurationMin { get; set; }
+
 		public int FacilityCategoryId { get; set; }
+
+		public virtual FacilityCategory FacilityCategory { get; set; }
 	}
 }
