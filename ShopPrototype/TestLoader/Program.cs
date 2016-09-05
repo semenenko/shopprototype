@@ -14,13 +14,13 @@ namespace TestLoader
 		{
 			InitialLoader loader = new InitialLoader();
 
-			//loader.Load();
+			loader.Load();
 
 			//55.787100, 37.454614
 
-			string name = loader.TestLocation(55.787100, 37.454614);
+			//string name = loader.TestLocation(55.787100, 37.454614);
 
-			Console.WriteLine(name);
+			//Console.WriteLine(name);
 
 
 			Console.ReadKey();
