@@ -1,13 +1,10 @@
 ﻿using ShopPrototype.Modules.Admin;
-using ShopPrototype.Modules.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ShopPrototype.Modules.Admin.Models;
 using ShopPrototype.Modules.Entities;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 
 namespace ShopPrototype.DataAccess.EF.Admin
 {
