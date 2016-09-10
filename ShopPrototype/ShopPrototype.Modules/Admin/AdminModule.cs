@@ -83,5 +83,55 @@ namespace ShopPrototype.Modules.Admin
 				return repository.GetSalon(id);
 			}
 		}
+
+		public void UpdateSalon(SalonModel model)
+		{
+			using (IUnitOfWork unitOfWork = repository.BeginUnitOfWork())
+			{
+				Salon salon = repository.GetEntity<Salon>(model.Id);
+
+				salon.Name = model.SalonName;
+				salon.Address = model.Address;
+				salon.Phone = model.Phone;
+
+				IEnumerable<SalonFacilityModel> facilitiesInModel = model.Facilities.Where(x => x.Selected).ToList();
+
+				UpdateSalonFacilities(salon, facilitiesInModel);
+
+				unitOfWork.Commit();
+			}
+		}
+
+		void UpdateSalonFacilities(Salon salon, IEnumerable<SalonFacilityModel> models)
+		{
+			IEnumerable<SalonFacility> entities = salon.Facilities.ToList();
+
+			foreach(SalonFacility entity in entities)
+			{
+				SalonFacilityModel model = models.FirstOrDefault(x => x.FacilityId == entity.FacilityId);
+
+				if (model == null)
+				{
+					salon.Facilities.Remove(entity);
+					continue;
+				}
+
+				entity.DurationMin = model.DurationMin;
+			}
+
+			foreach(SalonFacilityModel model in models)
+			{
+				if (entities.Any(x => x.FacilityId == model.FacilityId))
+					continue;
+
+				SalonFacility entity = new SalonFacility
+				{
+					FacilityId = model.FacilityId,
+					DurationMin = model.DurationMin
+				};
+
+				salon.Facilities.Add(entity);
+			}
+		}
 	}
 }

@@ -1,10 +1,6 @@
 ﻿using ShopPrototype.DataAccess.EF;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TestLoader
 {
@@ -14,7 +10,12 @@ namespace TestLoader
 		{
 			InitialLoader loader = new InitialLoader();
 
+			Stopwatch stopwatch = Stopwatch.StartNew();
+
+			Console.WriteLine("Load started");
 			loader.Load();
+			stopwatch.Stop();
+			Console.WriteLine("Finished at {0} ms", stopwatch.ElapsedMilliseconds);
 
 			//55.787100, 37.454614
 

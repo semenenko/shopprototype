@@ -5,5 +5,5 @@
 	<td>@Model.CategoryTitle</td>
 	<td>@Model.FacilityTitle @Html.HiddenFor(x => x.FacilityId)</td>
 	<td>@Html.CheckBoxFor(x => x.Selected)</td>
-	<td>@Html.TextBoxFor(x => x.DurationMin)</td>
+	<td>@Html.TextBoxFor(x => x.DurationMin, new { @class = "form-control", @type = "text", placeholder = "Продолжительность в минутах" })</td>
 </tr>

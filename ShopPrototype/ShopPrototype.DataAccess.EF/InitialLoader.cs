@@ -19,16 +19,46 @@ namespace ShopPrototype.DataAccess.EF
 
 			IEnumerable<Rootobject> objects = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Rootobject>>(json);
 
-			IEnumerable<Salon> salons = objects.Select(x => new Salon
+			List<Salon> salons = new List<Salon>();
+
+			foreach(Rootobject rootobject in objects)
 			{
-				Name = x.Cells.Name,
-				Lat = x.Lat,
-				Long = x.Lon
-			}).ToList();
+				string phone = null;
+				if (rootobject.Cells.PublicPhone != null && rootobject.Cells.PublicPhone.Any())
+				{
+					Publicphone phoneObject = rootobject.Cells.PublicPhone.FirstOrDefault();
+					if (phoneObject != null && phoneObject.PublicPhone != null)
+						phone = phoneObject.PublicPhone.ToString();
+				}
+
+				Salon salon = new Salon
+				{
+					Name = rootobject.Cells.Name,
+					Lat = rootobject.Lat,
+					Long = rootobject.Lon,
+					AdministrativeArea = rootobject.Cells.AdmArea,
+					District = rootobject.Cells.District,
+					Address = rootobject.Cells.Address,
+					Phone = phone
+				};
+
+				salons.Add(salon);
+			}
+
+			//IEnumerable<Salon> salons = objects.Select(rootobject => new Salon
+			//{
+			//	Name = rootobject.Cells.Name,
+			//	Lat = rootobject.Lat,
+			//	Long = rootobject.Lon,
+			//	AdministrativeArea = rootobject.Cells.AdmArea,
+			//	District = rootobject.Cells.District,
+			//	Address = rootobject.Cells.Address,
+			//	Phone = rootobject.Cells.PublicPhone != null && rootobject.Cells.PublicPhone.Any() ? rootobject.Cells.PublicPhone.First().PublicPhone.ToString() : null
+			//}).ToList();
 
 			using (Context context = new Context())
 			{
-				context.BulkInsert<Salon>(salons);
+				context.BulkInsert(salons);
 				context.SaveChanges();
 			}
 				
@@ -38,7 +68,7 @@ namespace ShopPrototype.DataAccess.EF
 				IEnumerable<SalonLocation> y = x.Select(z => new SalonLocation
 				{
 					Id = z.Id,
-					Location = DbGeography.FromText(string.Format("POINT({0} {1})", z.Lat, z.Long).Replace(',', '.'))
+					Location = DbGeography.FromText(string.Format("POINT({0} {1})", z.Lat, z.Long).Replace(',', '.')),
 				}).ToList();
 
 				context.BulkInsert(y);

@@ -12,5 +12,10 @@ namespace ShopPrototype.DataAccess.EF
 
 			return UnitOfWork;
 		}
+
+		public T GetEntity<T>(object key) where T : class
+		{
+			return UnitOfWork.Context.Set<T>().Find(key);
+		}
 	}
 }

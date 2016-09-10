@@ -12,6 +12,14 @@ namespace ShopPrototype.Modules.Entities
 
 		public double Long { get; set; }
 
+		public string AdministrativeArea { get; set; }
+
+		public string District { get; set; }
+
+		public string Address { get; set; }
+
+		public string Phone { get; set; }
+
 		public virtual ICollection<SalonFacility> Facilities { get; set; }
 	}
 }

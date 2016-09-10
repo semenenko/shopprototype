@@ -93,6 +93,10 @@
     <Compile Include="Migrations\201609041726135_salon_facility.Designer.cs">
       <DependentUpon>201609041726135_salon_facility.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609102015516_Salon_data.cs" />
+    <Compile Include="Migrations\201609102015516_Salon_data.Designer.cs">
+      <DependentUpon>201609102015516_Salon_data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObjectProcessor.cs" />
@@ -133,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609041726135_salon_facility.resx">
       <DependentUpon>201609041726135_salon_facility.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609102015516_Salon_data.resx">
+      <DependentUpon>201609102015516_Salon_data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

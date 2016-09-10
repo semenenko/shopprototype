@@ -66,5 +66,13 @@ namespace ShopPrototype.Front.Classic.Controllers
 
 			return View(model);
 		}
+
+		[HttpPost]
+		public ActionResult Salon(SalonModel model)
+		{
+			adminModule.UpdateSalon(model);
+
+			return RedirectToAction("Salon");
+		}
 	}
 }

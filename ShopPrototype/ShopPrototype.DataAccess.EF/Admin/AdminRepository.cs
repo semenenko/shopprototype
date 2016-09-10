@@ -114,17 +114,22 @@ namespace ShopPrototype.DataAccess.EF.Admin
 					CategoryTitle = x.FacilityCategory.Title
 				}).ToList();
 
-			foreach(SalonFacility facility in salon.Facilities)
+			if(salon.Facilities != null)
 			{
-				SalonFacilityModel modelFacility = facilities.First(x => x.FacilityId == facility.FacilityId);
-				modelFacility.Selected = true;
-				modelFacility.DurationMin = facility.DurationMin;
+				foreach (SalonFacility facility in salon.Facilities)
+				{
+					SalonFacilityModel modelFacility = facilities.First(x => x.FacilityId == facility.FacilityId);
+					modelFacility.Selected = true;
+					modelFacility.DurationMin = facility.DurationMin;
+				}
 			}
 
 			SalonModel result = new SalonModel
 			{
 				Id = salon.Id,
 				SalonName = salon.Name,
+				Address = salon.Address,
+				Phone = salon.Phone,
 				Lat = salon.Lat,
 				Long = salon.Long,
 				Facilities = facilities.OrderBy(x => x.CategoryTitle).ThenBy(x => x.FacilityTitle).ToList()
