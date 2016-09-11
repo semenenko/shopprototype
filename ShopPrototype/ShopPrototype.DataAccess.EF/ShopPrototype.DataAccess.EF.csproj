@@ -101,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryObjectProcessor.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Search\SearchRepository.cs" />
     <Compile Include="SortCommand.cs" />
     <Compile Include="SpecificEntities\Location.cs" />
     <Compile Include="SpecificEntities\SalonLocation.cs" />

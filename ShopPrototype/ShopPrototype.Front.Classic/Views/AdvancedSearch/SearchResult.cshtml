@@ -1,0 +1,17 @@
+﻿@using ShopPrototype.Modules.AdvancedSearch.Models
+@model SearchResult
+
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2>SearchResult</h2>
+
+<ol>
+	@foreach(var item in Model.Items)
+	{
+		<li>
+			@item.Name - @item.Address
+		</li>
+	}
+</ol>

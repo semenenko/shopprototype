@@ -1,4 +1,5 @@
-﻿using ShopPrototype.Modules.Search;
+﻿using ShopPrototype.Modules.AdvancedSearch.Models;
+using ShopPrototype.Modules.Search;
 using ShopPrototype.Modules.Search.Models;
 using System.Web.Mvc;
 
@@ -41,7 +42,8 @@ namespace ShopPrototype.Front.Classic.Controllers
 
 		public ActionResult AsapSearchLocation()
 		{
-			return View();
+			SearchByCoordinatesQuery model = new SearchByCoordinatesQuery();
+			return View(model);
 		}
 	}
 }

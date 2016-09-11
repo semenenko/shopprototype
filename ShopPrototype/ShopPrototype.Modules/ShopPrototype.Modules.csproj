@@ -50,6 +50,10 @@
     <Compile Include="Admin\Models\SalonModel.cs" />
     <Compile Include="Admin\Models\SalonQueryObject.cs" />
     <Compile Include="Admin\Models\SalonsList.cs" />
+    <Compile Include="AdvancedSearch\ISearchRepository.cs" />
+    <Compile Include="AdvancedSearch\Models\SearchByCoordinatesQuery.cs" />
+    <Compile Include="AdvancedSearch\Models\SearchResult.cs" />
+    <Compile Include="AdvancedSearch\SearchModule.cs" />
     <Compile Include="Core\ColumnHeader.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
