@@ -1,9 +1,11 @@
-﻿using ShopPrototype.Modules.Admin;
+﻿using ShopPrototype.DataAccess.EF.SpecificEntities;
+using ShopPrototype.Modules.Admin;
 using ShopPrototype.Modules.Admin.Models;
 using ShopPrototype.Modules.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Spatial;
 using System.Linq;
 
 namespace ShopPrototype.DataAccess.EF.Admin
@@ -99,12 +101,8 @@ namespace ShopPrototype.DataAccess.EF.Admin
 			return result;
 		}
 
-		public SalonModel GetSalon(int id)
+		IEnumerable<SalonFacilityModel> GetFacilitiesModels()
 		{
-			Salon salon = UnitOfWork.Context.Salons
-				.Include(x => x.Facilities)
-				.FirstOrDefault(x => x.Id == id);
-
 			IEnumerable<SalonFacilityModel> facilities = UnitOfWork.Context.Facilities
 				.Select(x => new SalonFacilityModel
 				{
@@ -112,16 +110,34 @@ namespace ShopPrototype.DataAccess.EF.Admin
 					FacilityCategoryId = x.FacilityCategoryId,
 					FacilityTitle = x.Title,
 					CategoryTitle = x.FacilityCategory.Title
-				}).ToList();
+				}).OrderBy(x => x.CategoryTitle).ThenBy(x => x.FacilityTitle).ToList();
 
-			if(salon.Facilities != null)
+			return facilities;
+		}
+
+		public SalonModel GetNewSalon()
+		{
+			SalonModel result = new SalonModel
 			{
-				foreach (SalonFacility facility in salon.Facilities)
-				{
-					SalonFacilityModel modelFacility = facilities.First(x => x.FacilityId == facility.FacilityId);
-					modelFacility.Selected = true;
-					modelFacility.DurationMin = facility.DurationMin;
-				}
+				Facilities = GetFacilitiesModels()
+			};
+
+			return result;
+		}
+
+		public SalonModel GetSalon(int id)
+		{
+			Salon salon = UnitOfWork.Context.Salons
+				.Include(x => x.Facilities)
+				.FirstOrDefault(x => x.Id == id);
+
+			IEnumerable<SalonFacilityModel> facilities = GetFacilitiesModels();
+
+			foreach (SalonFacility facility in salon.Facilities)
+			{
+				SalonFacilityModel modelFacility = facilities.First(x => x.FacilityId == facility.FacilityId);
+				modelFacility.Selected = true;
+				modelFacility.DurationMin = facility.DurationMin;
 			}
 
 			SalonModel result = new SalonModel
@@ -132,10 +148,26 @@ namespace ShopPrototype.DataAccess.EF.Admin
 				Phone = salon.Phone,
 				Lat = salon.Lat,
 				Long = salon.Long,
-				Facilities = facilities.OrderBy(x => x.CategoryTitle).ThenBy(x => x.FacilityTitle).ToList()
+				Facilities = facilities
 			};
 
 			return result;
+		}
+
+		public void AddOrUpdateLocation(Salon salon)
+		{
+			SalonLocation location = UnitOfWork.Context.Locations.FirstOrDefault(x => x.Id == salon.Id);
+
+			if (location == null)
+			{
+				location = new SalonLocation
+				{
+					Id = salon.Id
+				};
+				UnitOfWork.Context.Locations.Add(location);
+			}
+
+			location.Location = DbGeography.FromText(string.Format("POINT({0} {1})", salon.Lat, salon.Long).Replace(',', '.'));
 		}
 	}
 }

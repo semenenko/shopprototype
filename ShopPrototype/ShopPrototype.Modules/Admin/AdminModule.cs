@@ -76,6 +76,12 @@ namespace ShopPrototype.Modules.Admin
 			}
 		}
 
+		public SalonModel GetNewSalon()
+		{
+			using (repository.BeginUnitOfWork())
+				return repository.GetNewSalon();
+		}
+
 		public SalonModel GetSalon(int id)
 		{
 			using (IUnitOfWork unitOfWork = repository.BeginUnitOfWork())
@@ -90,21 +96,32 @@ namespace ShopPrototype.Modules.Admin
 			{
 				Salon salon = repository.GetEntity<Salon>(model.Id);
 
-				salon.Name = model.SalonName;
-				salon.Address = model.Address;
-				salon.Phone = model.Phone;
+				if (salon == null)
+				{
+					salon = new Salon();
+					repository.AddEntity(salon);
+				}
+
+				model.UpdateEntity(salon);
+
+				if (model.LocationChanged)
+				{
+					repository.AddOrUpdateLocation(salon);
+				}
 
 				IEnumerable<SalonFacilityModel> facilitiesInModel = model.Facilities.Where(x => x.Selected).ToList();
 
 				UpdateSalonFacilities(salon, facilitiesInModel);
 
 				unitOfWork.Commit();
+
+				model.Id = salon.Id;
 			}
 		}
 
 		void UpdateSalonFacilities(Salon salon, IEnumerable<SalonFacilityModel> models)
 		{
-			IEnumerable<SalonFacility> entities = salon.Facilities.ToList();
+			IEnumerable<SalonFacility> entities = salon.Facilities != null ? salon.Facilities.ToList() : new List<SalonFacility>();
 
 			foreach(SalonFacility entity in entities)
 			{

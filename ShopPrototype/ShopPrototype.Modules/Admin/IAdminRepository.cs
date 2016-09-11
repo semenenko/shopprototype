@@ -1,5 +1,6 @@
 ﻿using ShopPrototype.Modules.Admin.Models;
 using ShopPrototype.Modules.Core;
+using ShopPrototype.Modules.Entities;
 
 namespace ShopPrototype.Modules.Admin
 {
@@ -17,6 +18,10 @@ namespace ShopPrototype.Modules.Admin
 
 		SalonsList GetSalons(SalonQueryObject queryObject);
 
+		SalonModel GetNewSalon();
+
 		SalonModel GetSalon(int id);
+
+		void AddOrUpdateLocation(Salon salon);
 	}
 }

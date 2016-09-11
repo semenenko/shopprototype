@@ -67,12 +67,21 @@ namespace ShopPrototype.Front.Classic.Controllers
 			return View(model);
 		}
 
+		const string SalonViewName = "Salon";
+
 		[HttpPost]
 		public ActionResult Salon(SalonModel model)
 		{
 			adminModule.UpdateSalon(model);
 
-			return RedirectToAction("Salon");
+			return RedirectToAction(SalonViewName, new { id = model.Id });
+		}
+
+		public ActionResult CreateSalon()
+		{
+			SalonModel model = adminModule.GetNewSalon();
+
+			return View(SalonViewName, model);
 		}
 	}
 }
