@@ -17,7 +17,7 @@ namespace ShopPrototype.Modules.Admin.Models
 		{
 			get
 			{
-				if (!Facilities.Any())
+				if (Facilities == null || !Facilities.Any())
 					return 1;
 
 				return Facilities.Max(x => x.SortOrder) + 1;
