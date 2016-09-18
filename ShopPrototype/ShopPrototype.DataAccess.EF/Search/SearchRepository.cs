@@ -8,7 +8,7 @@ namespace ShopPrototype.DataAccess.EF.Search
 {
 	public class SearchRepository : Repository, ISearchRepository
 	{
-		public SearchResult SearchByCoordinates(SearchByCoordinatesQuery query)
+		public SearchResult Search(SearchQuery query)
 		{
 			DbGeography myLocation = DbGeography.FromText(string.Format("POINT({0} {1})", query.Lat, query.Long).Replace(',', '.'));
 
@@ -19,8 +19,14 @@ namespace ShopPrototype.DataAccess.EF.Search
 				{
 					Id = x.Id,
 					Name = x.Salon.Name,
-					Address = x.Salon.Address
+					Address = x.Salon.Address,
+					FacilitiesIds = x.Salon.Facilities.Select(y => y.FacilityId).ToList()
 				}).ToList();
+
+			if (query.SelectedFacilitiesIds.Any())
+			{
+				items = items.Where(x => x.FacilitiesIds.Intersect(query.SelectedFacilitiesIds).Count() == query.SelectedFacilitiesIds.Count()).ToList();
+			}
 
 			SearchResult result = new SearchResult
 			{
@@ -30,6 +36,19 @@ namespace ShopPrototype.DataAccess.EF.Search
 			};
 
 			return result;
+		}
+
+		public IEnumerable<FacilitySearchItem> GetFacilitiesSearchItems()
+		{
+			return UnitOfWork.Context.Facilities
+				.Select(x => new FacilitySearchItem
+				{
+					Id = x.Id,
+					Title = x.Title,
+					CategoryTitle = x.FacilityCategory.Title,
+					CategorySortOrder = x.FacilityCategory.SortOrder,
+					FacilitySortOrder = x.SortOrder
+				}).OrderBy(x => x.CategorySortOrder).ThenBy(x => x.FacilitySortOrder).ToList();
 		}
 	}
 }

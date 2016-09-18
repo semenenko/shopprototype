@@ -42,7 +42,7 @@ namespace ShopPrototype.Front.Classic.Controllers
 
 		public ActionResult AsapSearchLocation()
 		{
-			SearchByCoordinatesQuery model = new SearchByCoordinatesQuery();
+			SearchQuery model = new SearchQuery();
 			return View(model);
 		}
 	}

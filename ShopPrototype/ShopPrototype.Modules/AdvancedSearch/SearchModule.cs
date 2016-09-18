@@ -16,11 +16,23 @@ namespace ShopPrototype.Modules.AdvancedSearch
 
 		readonly ISearchRepository repository;
 
-		public SearchResult SearchByCoordinates(SearchByCoordinatesQuery query)
+		public SearchQuery GetSearchQuery()
+		{
+			SearchQuery resut = new SearchQuery();
+
+			using (repository.BeginUnitOfWork())
+			{
+				resut.Facilities = repository.GetFacilitiesSearchItems();
+			}
+
+			return resut;
+		}
+
+		public SearchResult SearchByCoordinates(SearchQuery query)
 		{
 			using (repository.BeginUnitOfWork())
 			{
-				return repository.SearchByCoordinates(query);
+				return repository.Search(query);
 			}
 		}
 	}

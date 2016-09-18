@@ -1,0 +1,7 @@
+﻿@using ShopPrototype.Modules.AdvancedSearch.Models
+@model FacilitySearchItem
+<tr>
+	<td>@Html.HiddenFor(m => m.Id) @Model.CategoryTitle</td>
+	<td>@Model.Title</td>
+	<td>@Html.CheckBoxFor(m => m.Selected)</td>
+</tr>

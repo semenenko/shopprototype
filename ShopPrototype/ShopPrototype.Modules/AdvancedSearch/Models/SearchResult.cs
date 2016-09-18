@@ -18,5 +18,7 @@ namespace ShopPrototype.Modules.AdvancedSearch.Models
 		public string Name { get; set; }
 
 		public string Address { get; set; }
+
+		public IEnumerable<int> FacilitiesIds { get; set; }
 	}
 }

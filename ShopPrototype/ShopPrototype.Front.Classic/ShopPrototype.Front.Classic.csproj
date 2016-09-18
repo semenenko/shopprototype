@@ -411,7 +411,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -464,8 +466,9 @@
     <Content Include="Views\Admin\Salons.cshtml" />
     <Content Include="Views\Admin\Salon.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\SalonFacilityModel.cshtml" />
-    <Content Include="Views\AdvancedSearch\SearchByMap.cshtml" />
+    <Content Include="Views\AdvancedSearch\Search.cshtml" />
     <Content Include="Views\AdvancedSearch\SearchResult.cshtml" />
+    <Content Include="Views\AdvancedSearch\EditorTemplates\FacilitySearchItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
