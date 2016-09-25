@@ -457,15 +457,14 @@
     <Content Include="Views\Admin\FacilitiesList.cshtml" />
     <Content Include="Views\Admin\CategoriesList.cshtml" />
     <Content Include="Views\Admin\Category.cshtml" />
-    <Content Include="Views\Admin\EditorTemplates\_FacilityCategoryModel.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\FacilityModel.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\SalonQueryObject.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\PagerPartial.cshtml" />
     <Content Include="Views\Admin\DisplayTemplates\SalonsList.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ColumnHeader.cshtml" />
     <Content Include="Views\Admin\Salons.cshtml" />
-    <Content Include="Views\Admin\Salon.cshtml" />
-    <Content Include="Views\Admin\EditorTemplates\SalonFacilityModel.cshtml" />
+    <Content Include="Views\Shared\Salon.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SalonFacilityModel.cshtml" />
     <Content Include="Views\AdvancedSearch\Search.cshtml" />
     <Content Include="Views\AdvancedSearch\SearchResult.cshtml" />
     <Content Include="Views\AdvancedSearch\EditorTemplates\FacilitySearchItem.cshtml" />

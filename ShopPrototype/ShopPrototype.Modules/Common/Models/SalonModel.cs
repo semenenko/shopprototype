@@ -1,7 +1,7 @@
 ﻿using ShopPrototype.Modules.Entities;
 using System.Collections.Generic;
 
-namespace ShopPrototype.Modules.Admin.Models
+namespace ShopPrototype.Modules.Common.Models
 {
 	public class SalonModel
 	{

@@ -1,6 +1,7 @@
 ﻿using ShopPrototype.DataAccess.EF.SpecificEntities;
 using ShopPrototype.Modules.Admin;
 using ShopPrototype.Modules.Admin.Models;
+using ShopPrototype.Modules.Common.Models;
 using ShopPrototype.Modules.Entities;
 using System;
 using System.Collections.Generic;

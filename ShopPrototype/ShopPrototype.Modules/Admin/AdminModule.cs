@@ -1,6 +1,8 @@
 ﻿using ShopPrototype.Modules.Admin.Models;
+using ShopPrototype.Modules.Common.Models;
 using ShopPrototype.Modules.Core;
 using ShopPrototype.Modules.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -147,8 +149,16 @@ namespace ShopPrototype.Modules.Admin
 					DurationMin = model.DurationMin
 				};
 
+				if (salon.Facilities == null)
+					salon.Facilities = new List<SalonFacility>();
+
 				salon.Facilities.Add(entity);
 			}
+		}
+
+		public SalonSchedule GetSalonSchedule(int salonId, DateTime date)
+		{
+
 		}
 	}
 }

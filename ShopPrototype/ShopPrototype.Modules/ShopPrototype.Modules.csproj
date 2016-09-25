@@ -45,15 +45,20 @@
     <Compile Include="Admin\Models\CategoriesList.cs" />
     <Compile Include="Admin\Models\FacilityCategoryModel.cs" />
     <Compile Include="Admin\Models\FacilityModel.cs" />
-    <Compile Include="Admin\Models\SalonFacilityModel.cs" />
+    <Compile Include="Common\Models\SalonFacilityModel.cs" />
     <Compile Include="Admin\Models\SalonListItem.cs" />
-    <Compile Include="Admin\Models\SalonModel.cs" />
+    <Compile Include="Common\Models\SalonModel.cs" />
     <Compile Include="Admin\Models\SalonQueryObject.cs" />
     <Compile Include="Admin\Models\SalonsList.cs" />
     <Compile Include="AdvancedSearch\ISearchRepository.cs" />
     <Compile Include="AdvancedSearch\Models\SearchQuery.cs" />
     <Compile Include="AdvancedSearch\Models\SearchResult.cs" />
     <Compile Include="AdvancedSearch\SearchModule.cs" />
+    <Compile Include="Business\BusinessModule.cs" />
+    <Compile Include="Business\IBusinessRepository.cs" />
+    <Compile Include="Common\Models\FacilityDaySchedule.cs" />
+    <Compile Include="Common\FacilityScheduler.cs" />
+    <Compile Include="Common\Models\SalonSchedule.cs" />
     <Compile Include="Core\ColumnHeader.cs" />
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
@@ -68,6 +73,7 @@
     <Compile Include="Search\Models\FacilityItem.cs" />
     <Compile Include="Search\Models\SearchModel.cs" />
     <Compile Include="Search\SearchModule.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

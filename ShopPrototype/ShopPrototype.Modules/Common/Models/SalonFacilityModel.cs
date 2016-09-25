@@ -1,4 +1,4 @@
-﻿namespace ShopPrototype.Modules.Admin.Models
+﻿namespace ShopPrototype.Modules.Common.Models
 {
 	public class SalonFacilityModel
 	{

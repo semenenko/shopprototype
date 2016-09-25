@@ -1,4 +1,5 @@
 ﻿using ShopPrototype.Modules.Admin.Models;
+using ShopPrototype.Modules.Common.Models;
 using ShopPrototype.Modules.Core;
 using ShopPrototype.Modules.Entities;
 

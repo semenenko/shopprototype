@@ -1,6 +1,7 @@
 ﻿using ShopPrototype.DataAccess.EF.Admin;
 using ShopPrototype.Modules.Admin;
 using ShopPrototype.Modules.Admin.Models;
+using ShopPrototype.Modules.Common.Models;
 using System.Web.Mvc;
 
 namespace ShopPrototype.Front.Classic.Controllers
