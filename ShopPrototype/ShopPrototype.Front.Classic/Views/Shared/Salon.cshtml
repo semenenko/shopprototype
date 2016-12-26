@@ -54,6 +54,10 @@
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="submit" class="btn btn-primary">Сохранить</button>
 			@Html.ActionLink("Отмена", "Salons", "Admin", null, new { @class = "btn btn-default" })
+			@if (Model.Id != 0)
+			{
+				@Html.ActionLink("Расписание", "Calendar", "Admin", new { salonId = Model.Id }, new { @class = "btn btn-default" })
+			}
 		</div>
 	</div>
 }

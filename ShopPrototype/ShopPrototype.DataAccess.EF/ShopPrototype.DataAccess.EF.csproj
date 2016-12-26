@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Admin\AdminRepository.cs" />
     <Compile Include="Admin\SalonQueryObjectProcessor.cs" />
+    <Compile Include="Common\CalendarModuleRepository.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="InitialLoader.cs" />
     <Compile Include="Migrations\201608221902041_init.cs" />
@@ -96,6 +97,10 @@
     <Compile Include="Migrations\201609102015516_Salon_data.cs" />
     <Compile Include="Migrations\201609102015516_Salon_data.Designer.cs">
       <DependentUpon>201609102015516_Salon_data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612241705454_timeSlots.cs" />
+    <Compile Include="Migrations\201612241705454_timeSlots.Designer.cs">
+      <DependentUpon>201612241705454_timeSlots.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609102015516_Salon_data.resx">
       <DependentUpon>201609102015516_Salon_data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612241705454_timeSlots.resx">
+      <DependentUpon>201612241705454_timeSlots.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

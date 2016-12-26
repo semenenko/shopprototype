@@ -419,6 +419,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -468,6 +469,9 @@
     <Content Include="Views\AdvancedSearch\Search.cshtml" />
     <Content Include="Views\AdvancedSearch\SearchResult.cshtml" />
     <Content Include="Views\AdvancedSearch\EditorTemplates\FacilitySearchItem.cshtml" />
+    <Content Include="Views\Admin\Calendar.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\CalendarFacilityItem.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\FacilityTimeSlotItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

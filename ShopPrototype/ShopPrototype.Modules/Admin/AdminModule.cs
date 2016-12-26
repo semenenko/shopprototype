@@ -155,10 +155,5 @@ namespace ShopPrototype.Modules.Admin
 				salon.Facilities.Add(entity);
 			}
 		}
-
-		public SalonSchedule GetSalonSchedule(int salonId, DateTime date)
-		{
-
-		}
 	}
 }

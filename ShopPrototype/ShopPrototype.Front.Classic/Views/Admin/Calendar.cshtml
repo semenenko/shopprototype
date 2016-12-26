@@ -1,0 +1,30 @@
+﻿@using ShopPrototype.Modules.Common.Models
+@model SalonCalendar
+
+@{
+    ViewBag.Title = "Расписание";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.HiddenFor(m => m.SalonId)
+	@Html.HiddenFor(m => m.ScheduleDate)
+	<table class="table">
+		<tbody>
+			@Html.EditorFor(m => m.Facilities)
+		</tbody>
+	</table>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary">Сохранить</button>
+		</div>
+	</div>
+}
+
+
+	
+
+
