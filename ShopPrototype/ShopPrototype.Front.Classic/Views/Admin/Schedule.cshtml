@@ -2,15 +2,15 @@
 @model DaySchedule
 
 @{
-    ViewBag.Title = "Расписание для салона " + Model.SalonName + " на " + Model.Date.ToShortDateString();
+	ViewBag.Title = "Расписание для салона " + Model.SalonName + " на " + Model.CurrentDate.ToShortDateString();
 }
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Schedule", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-	@Html.HiddenFor(m => m.SalonId)
-	@Html.HiddenFor(m => m.Date)
+	@Html.HiddenFor(m => m.Id)
+	@Html.HiddenFor(m => m.CurrentDate)
 	<table class="table table-condensed">
 		<thead>
 			<tr>

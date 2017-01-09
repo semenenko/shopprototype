@@ -118,7 +118,7 @@ namespace ShopPrototype.Front.Classic.Controllers
 		{
 			calendarModule.UpdateSalonDaySchedule(model);
 
-			return RedirectToAction("Schedule", new { salonId = model.SalonId, date = model.Date });
+			return RedirectToAction("Schedule", new { salonId = model.Id, date = model.CurrentDate });
 		}
 	}
 }

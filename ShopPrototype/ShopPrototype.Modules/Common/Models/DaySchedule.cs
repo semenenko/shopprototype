@@ -6,11 +6,11 @@ namespace ShopPrototype.Modules.Common.Models
 {
 	public class DaySchedule
 	{
-		public int SalonId { get; private set; }
+		public int Id { get; set; }
 
-		public string SalonName { get; private set; }
+		public string SalonName { get; set; }
 
-		public DateTime Date { get; private set; }
+		public DateTime CurrentDate { get; set; }
 
 		public IEnumerable<ScheduleItem> Items { get; private set; }
 
@@ -20,10 +20,10 @@ namespace ShopPrototype.Modules.Common.Models
 
 		public void Initialize(int salonId, string salonName, DateTime date, IEnumerable<ScheduleItem> items)
 		{
-			SalonId = salonId;
+			Id = salonId;
 			SalonName = salonName;
 			Items = items;
-			Date = date;
+			CurrentDate = date;
 
 			if (!Items.Any())
 			{

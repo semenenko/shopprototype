@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Data.Entity.Spatial;
+using ShopPrototype.Modules.Entities;
 
 namespace ShopPrototype.DataAccess.EF.ClientServices
 {
@@ -45,6 +46,17 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 			if (criteria.Facilities.Any())
 			{
 				items = items.Where(x => x.Facilities.Intersect(criteria.Facilities).Count() == criteria.Facilities.Count()).ToList();
+
+				IEnumerable<int> faciliesCategoriesIds = UnitOfWork.Context.Facilities
+					.Where(x => criteria.Facilities.Contains(x.Id))
+					.Select(x => x.FacilityCategoryId)
+					.ToList();
+
+				IEnumerable<SalonCategoryTimeSlot> categorySlotsAvailable = UnitOfWork.Context.SalonCategoryTimeSlots
+					.Where(x => faciliesCategoriesIds.Contains(x.CategoryId) && x.Start >= criteria.DateTime)
+					.ToList();
+
+				var zzz = categorySlotsAvailable.ToString();
 			}
 
 			return items;

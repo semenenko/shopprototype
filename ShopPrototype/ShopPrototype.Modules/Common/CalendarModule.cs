@@ -198,13 +198,13 @@ namespace ShopPrototype.Modules.Common
 		{
 			using (IUnitOfWork unitOfWork = repository.BeginUnitOfWork())
 			{
-				IEnumerable<SalonCategoryTimeSlot> storedSlots = repository.GetCategorySlots(model.SalonId, model.Date);
+				IEnumerable<SalonCategoryTimeSlot> storedSlots = repository.GetCategorySlots(model.Id, model.CurrentDate);
 
 				IEnumerable<ScheduleItem> modelItems = model.Rows.SelectMany(x => x.Items);
 
 				foreach (ScheduleItem modelItem in modelItems)
 				{
-					SalonCategoryTimeSlot storedSlot = storedSlots.FirstOrDefault(x => x.SalonId == model.SalonId
+					SalonCategoryTimeSlot storedSlot = storedSlots.FirstOrDefault(x => x.SalonId == model.Id
 						&& x.CategoryId == modelItem.CategoryId
 						&& x.Start == modelItem.ItemStartsAt
 						&& x.End == modelItem.ItemEndsAt);
@@ -213,7 +213,7 @@ namespace ShopPrototype.Modules.Common
 					{
 						storedSlot = new SalonCategoryTimeSlot
 						{
-							SalonId = model.SalonId,
+							SalonId = model.Id,
 							CategoryId = modelItem.CategoryId,
 							Start = modelItem.ItemStartsAt,
 							End = modelItem.ItemEndsAt
