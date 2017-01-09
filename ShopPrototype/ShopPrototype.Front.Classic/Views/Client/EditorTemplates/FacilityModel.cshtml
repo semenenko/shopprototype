@@ -1,0 +1,9 @@
+﻿@using ShopPrototype.Modules.ClientServices
+@model FacilityModel
+
+<li>
+	@Html.LabelFor(m => m.Checked, Model.Name)
+	@Html.HiddenFor(m => m.Id)
+	@Html.CheckBoxFor(m => m.Checked)
+</li>
+

@@ -45,7 +45,14 @@
     <Compile Include="Admin\Models\CategoriesList.cs" />
     <Compile Include="Admin\Models\FacilityCategoryModel.cs" />
     <Compile Include="Admin\Models\FacilityModel.cs" />
+    <Compile Include="ApplicationTime.cs" />
+    <Compile Include="ClientServices\ClientModule.cs" />
+    <Compile Include="ClientServices\IClientModuleRepository.cs" />
+    <Compile Include="ClientServices\IndexModel.cs" />
+    <Compile Include="ClientServices\SearchResultModel.cs" />
+    <Compile Include="ClientServices\SimpleSearchCriteria.cs" />
     <Compile Include="Common\ICalendarModuleRepository.cs" />
+    <Compile Include="Common\Models\DaySchedule.cs" />
     <Compile Include="Common\Models\SalonFacilityModel.cs" />
     <Compile Include="Admin\Models\SalonListItem.cs" />
     <Compile Include="Common\Models\SalonModel.cs" />
@@ -64,6 +71,7 @@
     <Compile Include="Entities\Facility.cs" />
     <Compile Include="Entities\FacilityCategory.cs" />
     <Compile Include="Entities\Salon.cs" />
+    <Compile Include="Entities\SalonCategoryTimeSlot.cs" />
     <Compile Include="Entities\SalonFacility.cs" />
     <Compile Include="Entities\SalonFacilityTimeSlot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

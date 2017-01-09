@@ -105,5 +105,20 @@ namespace ShopPrototype.Front.Classic.Controllers
 
 			return RedirectToAction("Calendar", new { salonId = model.SalonId, date = model.ScheduleDate });
 		}
+
+		public ActionResult Schedule(int salonId, DateTime? date)
+		{
+			DaySchedule model = calendarModule.GetDayScheduleForSalon(salonId, date);
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public ActionResult Schedule(DaySchedule model)
+		{
+			calendarModule.UpdateSalonDaySchedule(model);
+
+			return RedirectToAction("Schedule", new { salonId = model.SalonId, date = model.Date });
+		}
 	}
 }

@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -472,6 +473,14 @@
     <Content Include="Views\Admin\Calendar.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\CalendarFacilityItem.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\FacilityTimeSlotItem.cshtml" />
+    <Content Include="Views\Admin\Schedule.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\ScheduleRow.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\ScheduleItem.cshtml" />
+    <Content Include="Views\Shared\ClientLayout.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Client\EditorTemplates\CategoryGroupModel.cshtml" />
+    <Content Include="Views\Client\EditorTemplates\FacilityModel.cshtml" />
+    <Content Include="Views\Client\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

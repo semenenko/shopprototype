@@ -58,6 +58,10 @@
 			{
 				@Html.ActionLink("Расписание", "Calendar", "Admin", new { salonId = Model.Id }, new { @class = "btn btn-default" })
 			}
+			@if (Model.Id != 0)
+			{
+				@Html.ActionLink("Расписание 2", "Schedule", "Admin", new { salonId = Model.Id }, new { @class = "btn btn-default" })
+			}
 		</div>
 	</div>
 }

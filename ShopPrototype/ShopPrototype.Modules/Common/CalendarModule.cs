@@ -136,5 +136,98 @@ namespace ShopPrototype.Modules.Common
 				unitOfWork.Commit();
 			}
 		}
+
+		public DaySchedule GetDayScheduleForSalon(int salonId, DateTime? date)
+		{
+			DateTime scheduleDate = date ?? DateTime.Today;
+
+			using (repository.BeginUnitOfWork())
+			{
+				IEnumerable<SalonCategoryTimeSlot> storedSlotsForAllFacilities = repository.GetCategorySlots(salonId, scheduleDate);
+
+				Salon salon = repository.GetEntity<Salon>(salonId);
+				IEnumerable<FacilityCategory> categories = salon.Facilities
+					.Select(x => x.Facility.FacilityCategory)
+					.Distinct()
+					.ToList();
+
+				int slotDurationMin = 15;
+
+				List<ScheduleItem> scheduleItemsList = new List<ScheduleItem>();
+
+				foreach(FacilityCategory category in categories)
+				{
+					DateTime currentSlotStart = scheduleDate.Add(salon.OpensAt);
+					DateTime salonClosesAt = scheduleDate.Add(salon.ClosesAt);
+
+					while (true)
+					{
+						ScheduleItem item = new ScheduleItem
+						{
+							CategoryId = category.Id,
+							CategoryName = category.Title,
+							ItemStartsAt = currentSlotStart,
+							ItemEndsAt = currentSlotStart.AddMinutes(slotDurationMin)
+						};
+
+						SalonCategoryTimeSlot storedSlot = storedSlotsForAllFacilities.FirstOrDefault(x => x.SalonId == salonId
+						&& x.CategoryId == category.Id
+						&& x.Start == item.ItemStartsAt
+						&& x.End == item.ItemEndsAt);
+
+						if (storedSlot != null)
+							item.Available = storedSlot.Available;
+
+						scheduleItemsList.Add(item);
+
+						currentSlotStart = currentSlotStart.AddMinutes(slotDurationMin);
+
+						if (currentSlotStart > salonClosesAt)
+							break;
+					}
+				}
+
+				DaySchedule schedule = new DaySchedule();
+				schedule.Initialize(salonId, salon.Name, scheduleDate, scheduleItemsList);
+
+				return schedule;
+			}
+		}
+
+		public void UpdateSalonDaySchedule(DaySchedule model)
+		{
+			using (IUnitOfWork unitOfWork = repository.BeginUnitOfWork())
+			{
+				IEnumerable<SalonCategoryTimeSlot> storedSlots = repository.GetCategorySlots(model.SalonId, model.Date);
+
+				IEnumerable<ScheduleItem> modelItems = model.Rows.SelectMany(x => x.Items);
+
+				foreach (ScheduleItem modelItem in modelItems)
+				{
+					SalonCategoryTimeSlot storedSlot = storedSlots.FirstOrDefault(x => x.SalonId == model.SalonId
+						&& x.CategoryId == modelItem.CategoryId
+						&& x.Start == modelItem.ItemStartsAt
+						&& x.End == modelItem.ItemEndsAt);
+
+					if (storedSlot == null && modelItem.Available)
+					{
+						storedSlot = new SalonCategoryTimeSlot
+						{
+							SalonId = model.SalonId,
+							CategoryId = modelItem.CategoryId,
+							Start = modelItem.ItemStartsAt,
+							End = modelItem.ItemEndsAt
+						};
+
+						repository.AddEntity(storedSlot);
+					}
+
+					if (storedSlot != null)
+						storedSlot.Available = modelItem.Available;
+				}
+
+				unitOfWork.Commit();
+			}
+		}
 	}
 }

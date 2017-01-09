@@ -1,0 +1,7 @@
+﻿@using ShopPrototype.Modules.Common.Models
+@model ScheduleRow
+
+<tr>
+	<td>@Model.RowTime</td>
+	@Html.EditorFor(m => m.Items)
+</tr>

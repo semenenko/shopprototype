@@ -8,5 +8,7 @@ namespace ShopPrototype.Modules.Common
 	public interface ICalendarModuleRepository : IRepository
 	{
 		IEnumerable<SalonFacilityTimeSlot> GetTimeSlots(int salonId, DateTime date);
+
+		IEnumerable<SalonCategoryTimeSlot> GetCategorySlots(int salonId, DateTime date);
 	}
 }

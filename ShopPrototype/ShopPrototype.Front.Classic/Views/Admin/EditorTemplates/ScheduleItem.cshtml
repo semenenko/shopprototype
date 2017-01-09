@@ -1,0 +1,9 @@
+﻿@using ShopPrototype.Modules.Common.Models
+@model ScheduleItem
+
+<td>
+	@Html.HiddenFor(m => m.ItemStartsAt)
+	@Html.HiddenFor(m => m.ItemEndsAt)
+	@Html.HiddenFor(m => m.CategoryId)
+	@Html.CheckBoxFor(m => m.Available)
+</td>

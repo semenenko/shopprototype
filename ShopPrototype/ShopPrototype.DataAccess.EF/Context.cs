@@ -19,6 +19,8 @@ namespace ShopPrototype.DataAccess.EF
 
 		public DbSet<SalonFacilityTimeSlot> SalonFacilityTimeSlots { get; set; }
 
+		public DbSet<SalonCategoryTimeSlot> SalonCategoryTimeSlots { get; set; }
+
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);

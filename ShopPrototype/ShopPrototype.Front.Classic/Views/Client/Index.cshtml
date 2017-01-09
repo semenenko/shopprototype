@@ -1,0 +1,53 @@
+﻿@using ShopPrototype.Modules.ClientServices
+@model IndexModel
+
+@{
+    ViewBag.Title = "Поиск услуг";
+    Layout = "~/Views/Shared/ClientLayout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("SearchResult", "Client", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+	@Html.EditorFor(m => m.Categories)
+
+	<div class="yamap" id="map" style="width:100%; height:400px;">
+
+	</div>
+
+	@Html.HiddenFor(m => m.Lat)
+	@Html.HiddenFor(m => m.Long)
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary">Искать</button>
+		</div>
+	</div>
+}
+
+@section scripts{
+	<script type="text/javascript">
+	ymaps.ready(init);
+	var myMap;
+
+	function init() {
+		myMap = new ymaps.Map("map", {
+			center: [55.678672, 37.632153],
+			zoom: 12,
+			controls: []
+		});
+		myMap.controls.add('geolocationControl');
+		myMap.controls.add('zoomControl');
+
+		myMap.events.add('click', function (e) {
+			// Получение координат щелчка
+			var coords = e.get('coords');
+			$('#Lat').val(coords[0]);
+			$('#Long').val(coords[1]);
+			//alert(coords.join(', '));
+		});
+	}
+	</script>
+}
+

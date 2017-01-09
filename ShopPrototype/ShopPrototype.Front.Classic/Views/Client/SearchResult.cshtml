@@ -1,0 +1,17 @@
+﻿@using ShopPrototype.Modules.ClientServices
+@model SearchResultModel
+
+@{
+    ViewBag.Title = "SearchResult";
+    Layout = "~/Views/Shared/ClientLayout.cshtml";
+}
+
+<h2>SearchResult</h2>
+
+<ul>
+	@foreach(SalonModel salon in Model.Salons)
+	{
+		<li>@salon.SalonName @salon.Address</li>
+	}
+</ul>
+

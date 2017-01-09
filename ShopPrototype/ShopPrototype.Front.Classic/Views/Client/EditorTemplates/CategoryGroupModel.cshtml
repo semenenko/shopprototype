@@ -1,0 +1,8 @@
+﻿@using ShopPrototype.Modules.ClientServices
+@model CategoryGroupModel
+
+<h4>@Model.Name</h4>
+@Html.HiddenFor(m => m.Id)
+<ul>
+	@Html.EditorFor(m => m.Facilities)
+</ul>

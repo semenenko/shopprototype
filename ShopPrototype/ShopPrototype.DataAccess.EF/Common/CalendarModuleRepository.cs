@@ -17,5 +17,15 @@ namespace ShopPrototype.DataAccess.EF.Common
 				.Where(x => x.SlotStartsAt >= date && x.SlotStartsAt < dateTo)
 				.ToList();
 		}
+
+		public IEnumerable<SalonCategoryTimeSlot> GetCategorySlots(int salonId, DateTime date)
+		{
+			DateTime dateTo = date.AddDays(1);
+
+			return UnitOfWork.Context.SalonCategoryTimeSlots
+				.Where(x => x.SalonId == salonId)
+				.Where(x => x.Start >= date && x.End < dateTo)
+				.ToList();
+		}
 	}
 }

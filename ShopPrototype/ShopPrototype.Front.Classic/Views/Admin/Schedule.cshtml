@@ -1,0 +1,34 @@
+﻿@using ShopPrototype.Modules.Common.Models
+@model DaySchedule
+
+@{
+    ViewBag.Title = "Расписание для салона " + Model.SalonName + " на " + Model.Date.ToShortDateString();
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.HiddenFor(m => m.SalonId)
+	@Html.HiddenFor(m => m.Date)
+	<table class="table table-condensed">
+		<thead>
+			<tr>
+				<td></td>
+				@foreach(CategoryHeader header in Model.Headers)
+				{
+					<td>@header.Name</td>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			@Html.EditorFor(m => m.Rows)
+		</tbody>
+	</table>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary">Сохранить</button>
+		</div>
+	</div>
+}
