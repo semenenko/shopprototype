@@ -32,7 +32,7 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 		{
 			DbGeography myLocation = DbGeography.FromText(string.Format("POINT({0} {1})", criteria.Lat, criteria.Long).Replace(',', '.'));
 
-			IEnumerable<SalonModel> items = UnitOfWork.Context.Locations
+			IEnumerable<SalonModel> salonsByLocation = UnitOfWork.Context.Locations
 				.OrderBy(x => x.Location.Distance(myLocation))
 				.Take(20)
 				.Select(x => new SalonModel
@@ -45,21 +45,40 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 
 			if (criteria.Facilities.Any())
 			{
-				items = items.Where(x => x.Facilities.Intersect(criteria.Facilities).Count() == criteria.Facilities.Count()).ToList();
+				IEnumerable<SalonModel> salonsByLocationsAndFacilities = FilterSalonsByFacilities(salonsByLocation, criteria.Facilities);
 
-				IEnumerable<int> faciliesCategoriesIds = UnitOfWork.Context.Facilities
-					.Where(x => criteria.Facilities.Contains(x.Id))
-					.Select(x => x.FacilityCategoryId)
+				IEnumerable<Facility> criteriaFacilities = GetFacilities(criteria.Facilities);
+
+				IEnumerable<int> criteriaFaciliesCategoriesIds = criteriaFacilities.Select(x => x.FacilityCategoryId).ToList();
+
+				IEnumerable<SalonCategoryTimeSlot> allSlotsAvailable = UnitOfWork.Context.SalonCategoryTimeSlots
+					.Where(x => criteriaFaciliesCategoriesIds.Contains(x.CategoryId) && x.Start >= criteria.DateTime)
 					.ToList();
 
-				IEnumerable<SalonCategoryTimeSlot> categorySlotsAvailable = UnitOfWork.Context.SalonCategoryTimeSlots
-					.Where(x => faciliesCategoriesIds.Contains(x.CategoryId) && x.Start >= criteria.DateTime)
-					.ToList();
+				foreach (IGrouping<int, Facility> facilitiesGroup in criteriaFacilities.GroupBy(x => x.FacilityCategoryId))
+				{
+					int defaultDuration = 30;
+					int groupDurationInMin = facilitiesGroup.Sum(x => x.DurationMin != 0 ? x.DurationMin : defaultDuration);
+
+					IEnumerable<SalonCategoryTimeSlot> groupSlotsAvailable = allSlotsAvailable.Where(x => x.CategoryId == facilitiesGroup.Key).ToList();
+
+
+				}
 
 				var zzz = categorySlotsAvailable.ToString();
 			}
 
-			return items;
+			return salonsByLocation;
+		}
+
+		IEnumerable<Facility> GetFacilities(IEnumerable<int> ids)
+		{
+			return UnitOfWork.Context.Facilities.Where(x => ids.Contains(x.Id)).ToList();
+		}
+
+		IEnumerable<SalonModel> FilterSalonsByFacilities(IEnumerable<SalonModel> salons, IEnumerable<int> criteriaFacilitiesIds)
+		{
+			return salons.Where(x => x.Facilities.Intersect(criteriaFacilitiesIds).Count() == criteriaFacilitiesIds.Count()).ToList();
 		}
 	}
 }
