@@ -51,6 +51,7 @@
     <Compile Include="ClientServices\IndexModel.cs" />
     <Compile Include="ClientServices\SearchResultModel.cs" />
     <Compile Include="ClientServices\SimpleSearchCriteria.cs" />
+    <Compile Include="Common\EnumerableExtensions.cs" />
     <Compile Include="Common\ICalendarModuleRepository.cs" />
     <Compile Include="Common\Models\DaySchedule.cs" />
     <Compile Include="Common\Models\SalonFacilityModel.cs" />

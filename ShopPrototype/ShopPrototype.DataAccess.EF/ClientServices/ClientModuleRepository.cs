@@ -55,6 +55,8 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 					.Where(x => criteriaFaciliesCategoriesIds.Contains(x.CategoryId) && x.Start >= criteria.DateTime)
 					.ToList();
 
+				//I need permutation here
+
 				foreach (IGrouping<int, Facility> facilitiesGroup in criteriaFacilities.GroupBy(x => x.FacilityCategoryId))
 				{
 					int defaultDuration = 30;
@@ -65,7 +67,7 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 
 				}
 
-				var zzz = categorySlotsAvailable.ToString();
+				//var zzz = categorySlotsAvailable.ToString();
 			}
 
 			return salonsByLocation;
@@ -80,5 +82,44 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 		{
 			return salons.Where(x => x.Facilities.Intersect(criteriaFacilitiesIds).Count() == criteriaFacilitiesIds.Count()).ToList();
 		}
+
+		//http://stackoverflow.com/questions/7802822/all-possible-combinations-of-a-list-of-values
+		// Recursive
+		public static List<List<T>> GetAllCombos<T>(List<T> list)
+		{
+			List<List<T>> result = new List<List<T>>();
+			// head
+			result.Add(new List<T>());
+			result.Last().Add(list[0]);
+			if (list.Count == 1)
+				return result;
+			// tail
+			List<List<T>> tailCombos = GetAllCombos(list.Skip(1).ToList());
+			tailCombos.ForEach(combo =>
+			{
+				result.Add(new List<T>(combo));
+				combo.Add(list[0]);
+				result.Add(new List<T>(combo));
+			});
+			return result;
+		}
+
+		// Iterative, using 'i' as bitmask to choose each combo members
+		//public static List<List<T>> GetAllCombos<T>(List<T> list)
+		//{
+		//	int comboCount = (int)Math.Pow(2, list.Count) - 1;
+		//	List<List<T>> result = new List<List<T>>();
+		//	for (int i = 1; i < comboCount + 1; i++)
+		//	{
+		//		// make each combo here
+		//		result.Add(new List<T>());
+		//		for (int j = 0; j < list.Count; j++)
+		//		{
+		//			if ((i >> j) % 2 != 0)
+		//				result.Last().Add(list[j]);
+		//		}
+		//	}
+		//	return result;
+		//}
 	}
 }

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLoader", "TestLoader\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopPrototype.Front.Angular", "ShopPrototype.Front.Angular\ShopPrototype.Front.Angular.csproj", "{E8E3AF28-A4E6-4294-A2CF-C004FEAE31CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Tests", "Modules.Tests\Modules.Tests.csproj", "{61965FE1-A17E-43C5-8F09-33098820475C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E8E3AF28-A4E6-4294-A2CF-C004FEAE31CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8E3AF28-A4E6-4294-A2CF-C004FEAE31CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8E3AF28-A4E6-4294-A2CF-C004FEAE31CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61965FE1-A17E-43C5-8F09-33098820475C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61965FE1-A17E-43C5-8F09-33098820475C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61965FE1-A17E-43C5-8F09-33098820475C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61965FE1-A17E-43C5-8F09-33098820475C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
