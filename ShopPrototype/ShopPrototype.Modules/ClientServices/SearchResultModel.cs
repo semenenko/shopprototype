@@ -4,6 +4,15 @@ namespace ShopPrototype.Modules.ClientServices
 {
 	public class SearchResultModel
 	{
+		public SearchResultModel() { }
+
+		public SearchResultModel(string latitude, string longitude, IEnumerable<SelectedFacilities> facilities)
+		{
+			this.Lat = latitude;
+			this.Long = longitude;
+			Facilities = facilities;
+		}
+		
 		public string Lat { get; set; }
 
 		public string Long { get; set; }

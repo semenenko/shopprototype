@@ -28,5 +28,66 @@ namespace ShopPrototype.Modules.Common
 
 			return result;
 		}
+
+		//http://stackoverflow.com/questions/15150147/all-permutations-of-a-list
+		public static IEnumerable<IEnumerable<T>> GetAllPermutations<T>(this IEnumerable<T> sequence)
+		{
+			if (sequence == null)
+			{
+				yield break;
+			}
+
+			List<T> list = sequence.ToList();
+
+			if (!list.Any())
+			{
+				yield return Enumerable.Empty<T>();
+			}
+			else
+			{
+				int startingElementIndex = 0;
+
+				foreach (T startingElement in list)
+				{
+					IEnumerable<T> remainingItems = list.AllExcept(startingElementIndex);
+
+					foreach (IEnumerable<T> permutationOfRemainder in remainingItems.GetAllPermutations())
+					{
+						yield return startingElement.Concat(permutationOfRemainder);
+					}
+
+					startingElementIndex++;
+				}
+			}
+		}
+
+		static IEnumerable<T> Concat<T>(this T firstElement, IEnumerable<T> secondSequence)
+		{
+			yield return firstElement;
+			if (secondSequence == null)
+			{
+				yield break;
+			}
+
+			foreach (T item in secondSequence)
+			{
+				yield return item;
+			}
+		}
+
+		static IEnumerable<T> AllExcept<T>(this IEnumerable<T> sequence, int indexToSkip)
+		{
+			if (sequence == null)
+			{
+				yield break;
+			}
+
+			int index = 0;
+
+			foreach (T item in sequence.Where(item => index++ != indexToSkip))
+			{
+				yield return item;
+			}
+		}
 	}
 }

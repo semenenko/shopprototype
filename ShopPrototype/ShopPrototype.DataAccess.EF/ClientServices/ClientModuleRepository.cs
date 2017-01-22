@@ -28,6 +28,31 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 				.ToList();
 		}
 
+		public IEnumerable<SalonModel> GetNearestSalons(string latitude, string longitude, int count)
+		{
+			DbGeography myLocation = DbGeography.FromText(string.Format("POINT({0} {1})", latitude, longitude).Replace(',', '.'));
+
+			IEnumerable<SalonModel> result = UnitOfWork.Context.Locations
+				.OrderBy(x => x.Location.Distance(myLocation))
+				.Take(count)
+				.Select(x => new SalonModel
+				{
+					SalonId = x.Id,
+					SalonName = x.Salon.Name,
+					Address = x.Salon.Address,
+					Facilities = x.Salon.Facilities.Select(y => y.FacilityId).ToList()
+				}).ToList();
+
+			return result;
+		}
+
+		public IEnumerable<SalonCategoryTimeSlot> GetSlotsAvailable(DateTime datetime, IEnumerable<int> criteriaFaciliesCategoriesIds)
+		{
+			return UnitOfWork.Context.SalonCategoryTimeSlots
+					.Where(x => criteriaFaciliesCategoriesIds.Contains(x.CategoryId) && x.Start >= datetime)
+					.ToList();
+		}
+
 		public IEnumerable<SalonModel> GetSalonsByCriteria(SimpleSearchCriteria criteria)
 		{
 			DbGeography myLocation = DbGeography.FromText(string.Format("POINT({0} {1})", criteria.Lat, criteria.Long).Replace(',', '.'));
@@ -73,7 +98,7 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 			return salonsByLocation;
 		}
 
-		IEnumerable<Facility> GetFacilities(IEnumerable<int> ids)
+		public IEnumerable<Facility> GetFacilities(IEnumerable<int> ids)
 		{
 			return UnitOfWork.Context.Facilities.Where(x => ids.Contains(x.Id)).ToList();
 		}

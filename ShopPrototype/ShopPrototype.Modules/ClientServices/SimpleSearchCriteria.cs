@@ -5,6 +5,15 @@ namespace ShopPrototype.Modules.ClientServices
 {
 	public class SimpleSearchCriteria
 	{
+		public SimpleSearchCriteria() { }
+
+		public SimpleSearchCriteria(string latitude, string longitude, IEnumerable<int> facilitiesIds)
+		{
+			Lat = latitude;
+			Long = longitude;
+			Facilities = facilitiesIds;
+		}
+
 		public DateTime DateTime
 		{
 			get

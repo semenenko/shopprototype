@@ -14,6 +14,14 @@ namespace ShopPrototype.Modules.Entities
 
 		public DateTime End { get; set; }
 
+		public int DurationInMin
+		{
+			get
+			{
+				return (End - Start).Minutes;
+			}
+		}
+
 		public bool Available { get; set; }
 	}
 }
