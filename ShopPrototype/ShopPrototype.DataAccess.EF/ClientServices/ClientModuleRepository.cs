@@ -49,7 +49,7 @@ namespace ShopPrototype.DataAccess.EF.ClientServices
 		public IEnumerable<SalonCategoryTimeSlot> GetSlotsAvailable(DateTime datetime, IEnumerable<int> criteriaFaciliesCategoriesIds)
 		{
 			return UnitOfWork.Context.SalonCategoryTimeSlots
-					.Where(x => criteriaFaciliesCategoriesIds.Contains(x.CategoryId) && x.Start >= datetime)
+					.Where(x => x.Available && x.Start >= datetime && criteriaFaciliesCategoriesIds.Contains(x.CategoryId))
 					.ToList();
 		}
 

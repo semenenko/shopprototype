@@ -139,7 +139,7 @@ namespace ShopPrototype.Modules.Common
 
 		public DaySchedule GetDayScheduleForSalon(int salonId, DateTime? date)
 		{
-			DateTime scheduleDate = date ?? DateTime.Today;
+			DateTime scheduleDate = date ?? ApplicationTime.GetApplicationDefaultNow().Date;
 
 			using (repository.BeginUnitOfWork())
 			{

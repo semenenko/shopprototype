@@ -10,17 +10,16 @@ namespace Modules.Tests.ClientModuleTests
 	[TestClass]
 	public class GetSalonsForTimeSlotsTests
 	{
+		const int SlotDurationInMin = 15;
+
 		ClientModule GetModule()
 		{
 			return new ClientModule(null);
 		}
 
-		[TestMethod]
-		public void OneSalonAvailable()
+		IEnumerable<SalonModel> GetSalons()
 		{
-			DateTime testDate = DateTime.Now.Date;
-
-			IEnumerable<SalonModel> salons = new List<SalonModel>
+			return new List<SalonModel>
 			{
 				new SalonModel
 				{
@@ -31,8 +30,11 @@ namespace Modules.Tests.ClientModuleTests
 					SalonId = 10
 				}
 			};
+		}
 
-			IEnumerable<Facility> facilities = new List<Facility>
+		IEnumerable<Facility> GetFacilities()
+		{
+			return new List<Facility>
 			{
 				new Facility
 				{
@@ -45,47 +47,138 @@ namespace Modules.Tests.ClientModuleTests
 					FacilityCategoryId = 1
 				},
 			};
+		}
+
+		DateTime GetTestDate()
+		{
+			return DateTime.Now.Date;
+		}
+
+		SalonCategoryTimeSlot GetSalonCategoryTimeSlot(int salonId, int categoryId, bool available, DateTime startDateTime)
+		{
+			return new SalonCategoryTimeSlot
+			{
+				SalonId = salonId,
+				Available = available,
+				CategoryId = categoryId,
+				Start = startDateTime,
+				End = startDateTime.AddMinutes(SlotDurationInMin)
+			};
+		}
+
+		[TestMethod]
+		public void OneSalonAvailable()
+		{
+			DateTime testDate = GetTestDate();
+
+			IEnumerable<SalonModel> salons = GetSalons();
+
+			IEnumerable<Facility> facilities = GetFacilities();
 
 			IEnumerable<SalonCategoryTimeSlot> slots = new List<SalonCategoryTimeSlot>
 			{
-				new SalonCategoryTimeSlot
-				{
-					SalonId = 5,
-					Available = true,
-					CategoryId = 1,
-					Start = testDate.AddHours(12),
-					End = testDate.AddHours(12).AddMinutes(15)
-				},
-				new SalonCategoryTimeSlot
-				{
-					SalonId = 5,
-					Available = true,
-					CategoryId = 1,
-					Start = testDate.AddHours(12).AddMinutes(15),
-					End = testDate.AddHours(12).AddMinutes(30)
-				},
-				new SalonCategoryTimeSlot
-				{
-					SalonId = 5,
-					Available = true,
-					CategoryId = 1,
-					Start = testDate.AddHours(12).AddMinutes(30),
-					End = testDate.AddHours(12).AddMinutes(45)
-				},
-				new SalonCategoryTimeSlot
-				{
-					SalonId = 5,
-					Available = true,
-					CategoryId = 1,
-					Start = testDate.AddHours(12).AddMinutes(45),
-					End = testDate.AddHours(13).AddMinutes(0)
-				},
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(15)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(30)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(45))
 			};
 
 			IEnumerable<SalonModel> result = GetModule().GetSalonsForTimeSlots(salons, facilities, slots, testDate.AddHours(12));
 
 			Assert.AreEqual(1, result.Count());
 			Assert.AreEqual(5, result.First().SalonId);
+		}
+
+		[TestMethod]
+		public void TwoSalonAvailable()
+		{
+			DateTime testDate = GetTestDate();
+
+			IEnumerable<SalonModel> salons = GetSalons();
+
+			IEnumerable<Facility> facilities = GetFacilities();
+
+			IEnumerable<SalonCategoryTimeSlot> slots = new List<SalonCategoryTimeSlot>
+			{
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(15)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(45)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(13)),
+				GetSalonCategoryTimeSlot(10, 1, true, testDate.AddHours(12)),
+				GetSalonCategoryTimeSlot(10, 1, true, testDate.AddHours(12).AddMinutes(15)),
+				GetSalonCategoryTimeSlot(10, 1, true, testDate.AddHours(12).AddMinutes(45)),
+				GetSalonCategoryTimeSlot(10, 1, true, testDate.AddHours(13))
+			};
+
+			IEnumerable<SalonModel> result = GetModule().GetSalonsForTimeSlots(salons, facilities, slots, testDate.AddHours(12));
+
+			Assert.AreEqual(2, result.Count());
+		}
+
+		[TestMethod]
+		public void OneSalonAvailableWithIntervalInSlots()
+		{
+			DateTime testDate = GetTestDate();
+
+			IEnumerable<SalonModel> salons = GetSalons();
+
+			IEnumerable<Facility> facilities = GetFacilities();
+
+			IEnumerable<SalonCategoryTimeSlot> slots = new List<SalonCategoryTimeSlot>
+			{
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(15)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(45)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(13))
+			};
+
+			IEnumerable<SalonModel> result = GetModule().GetSalonsForTimeSlots(salons, facilities, slots, testDate.AddHours(12));
+
+			Assert.AreEqual(1, result.Count());
+			Assert.AreEqual(5, result.First().SalonId);
+		}
+
+		[TestMethod]
+		public void NoSalonAvailableTooBigInterval()
+		{
+			DateTime testDate = GetTestDate();
+
+			IEnumerable<SalonModel> salons = GetSalons();
+
+			IEnumerable<Facility> facilities = GetFacilities();
+
+			IEnumerable<SalonCategoryTimeSlot> slots = new List<SalonCategoryTimeSlot>
+			{
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(15)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(13)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(13).AddMinutes(15))
+			};
+
+			IEnumerable<SalonModel> result = GetModule().GetSalonsForTimeSlots(salons, facilities, slots, testDate.AddHours(12));
+
+			Assert.AreEqual(0, result.Count());
+		}
+
+		[TestMethod]
+		public void NoSalonAvailableNotEnoughSlots()
+		{
+			DateTime testDate = GetTestDate();
+
+			IEnumerable<SalonModel> salons = GetSalons();
+
+			IEnumerable<Facility> facilities = GetFacilities();
+
+			IEnumerable<SalonCategoryTimeSlot> slots = new List<SalonCategoryTimeSlot>
+			{
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(12).AddMinutes(15)),
+				GetSalonCategoryTimeSlot(5, 1, true, testDate.AddHours(13)),
+			};
+
+			IEnumerable<SalonModel> result = GetModule().GetSalonsForTimeSlots(salons, facilities, slots, testDate.AddHours(12));
+
+			Assert.AreEqual(0, result.Count());
 		}
 	}
 }

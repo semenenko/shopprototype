@@ -72,7 +72,7 @@ namespace ShopPrototype.Modules.ClientServices
 					foreach(int facilityId in permutation)
 					{
 						int categoryId = facilitiesDictionary[facilityId].FacilityCategoryId;
-						IEnumerable<SalonCategoryTimeSlot> slotsForFacility = slots.Where(x => x.CategoryId == categoryId).ToList();
+						IEnumerable<SalonCategoryTimeSlot> slotsForFacility = slots.Where(x => x.CategoryId == categoryId && x.Start >= facilityDateTime).ToList();
 
 						if (!slotsForFacility.Any())
 						{
@@ -119,6 +119,11 @@ namespace ShopPrototype.Modules.ClientServices
 			return result;
 		}
 
+		IEnumerable<SalonModel> FilterSalonsByFacilities(IEnumerable<SalonModel> salons, IEnumerable<int> criteriaFacilitiesIds)
+		{
+			return salons.Where(x => x.Facilities.Intersect(criteriaFacilitiesIds).Count() == criteriaFacilitiesIds.Count()).ToList();
+		}
+
 		public SearchResultModel GetSearchResult(IndexModel model)
 		{
 			using (repository.BeginUnitOfWork())
@@ -133,15 +138,17 @@ namespace ShopPrototype.Modules.ClientServices
 
 				IEnumerable<SalonModel> salons = repository.GetNearestSalons(criteria.Lat, criteria.Long, 20);
 
+				salons = FilterSalonsByFacilities(salons, selectedFacilitiesIds);
+
 				IEnumerable<Facility> facilities = repository.GetFacilities(selectedFacilitiesIds);
 
 				IEnumerable<int> selectedCategoriesIds = facilities.Select(x => x.FacilityCategoryId).ToList();
 
 				IEnumerable<SalonCategoryTimeSlot> slotsAvailable = repository.GetSlotsAvailable(criteria.DateTime, selectedCategoriesIds);
 
-				//salons = 
+				IEnumerable<SalonModel> availableSalons = GetSalonsForTimeSlots(salons, facilities, slotsAvailable, ApplicationTime.GetApplicationDefaultNow());
 
-				result.Salons = salons;
+				result.Salons = availableSalons;
 
 				return result;
 			}

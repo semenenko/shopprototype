@@ -23,7 +23,7 @@ namespace ShopPrototype.Modules.Entities
 
 		public TimeSpan OpensAt { get { return new TimeSpan(10, 0, 0); } }
 
-		public TimeSpan ClosesAt { get { return new TimeSpan(22, 0, 0); } }
+		public TimeSpan ClosesAt { get { return new TimeSpan(24, 0, 0); } }
 
 		public virtual ICollection<SalonFacility> Facilities { get; set; }
 	}
